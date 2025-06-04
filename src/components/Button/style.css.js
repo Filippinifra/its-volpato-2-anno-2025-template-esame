@@ -10,4 +10,5 @@ export const buttonClass = style({
   display: "flex",
   gap: 4,
   alignItems: "center",
+  justifyContent: "center",
 });
