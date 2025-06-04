@@ -28,6 +28,7 @@ export const SidebarLayout = ({ children, boxAction }) => {
               style={{ cursor: "pointer" }}
               onClick={() => setMobileMenuOpen(false)}
             />
+            chiudi
           </div>
           <SidebarItem
             icon={<BiHome />}
