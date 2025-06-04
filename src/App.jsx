@@ -3,6 +3,9 @@ import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import { BiPlus } from "react-icons/bi";
 import { Button } from "./components/Button";
 import { Card } from "./components/Card";
+import { ContentScreenCentered } from "./components/ContentScreenCentered";
+import { Login } from "./components/Login";
+import { Registration } from "./components/Registration";
 import { SidebarLayout } from "./components/SidebarLayout";
 
 const AppRoutes = () => {
@@ -31,10 +34,21 @@ const AppRoutes = () => {
           </SidebarLayout>
         }
       />
-      <Route path="/login" element={<div>Questa è la login!</div>} />
+      <Route
+        path="/login"
+        element={
+          <ContentScreenCentered>
+            <Login />
+          </ContentScreenCentered>
+        }
+      />
       <Route
         path="/singup"
-        element={<div>Questa è la pagina di registrazione!</div>}
+        element={
+          <ContentScreenCentered>
+            <Registration />
+          </ContentScreenCentered>
+        }
       />
       <Route
         path="/add-new"
