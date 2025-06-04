@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 
 import { BiPlus } from "react-icons/bi";
 import { Button } from "./components/Button";
+import { Card } from "./components/Card";
 import { SidebarLayout } from "./components/SidebarLayout";
 
 const AppRoutes = () => {
@@ -25,6 +26,8 @@ const AppRoutes = () => {
             }
           >
             Questa è la home!
+            <Card titolo={"bella!"} />
+            <Card titolo={"brutta!"} />
           </SidebarLayout>
         }
       />
