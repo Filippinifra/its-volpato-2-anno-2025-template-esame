@@ -5,7 +5,7 @@ export const headerWrapperClass = style({
   padding: "16px 32px",
   position: "sticky",
   top: 0,
-  backgroundColor: "red",
+  backgroundColor: "white",
   display: "flex",
   justifyContent: "flex-end",
   gap: 12,
