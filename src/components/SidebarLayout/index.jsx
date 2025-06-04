@@ -6,6 +6,7 @@ import {
   externalWrapperClass,
   hamburgerWrapperClass,
   headerWrapperClass,
+  mobileWrapperPanel,
   sidebarWrapperClass,
 } from "./style.css";
 
@@ -15,19 +16,7 @@ export const SidebarLayout = ({ children, boxAction }) => {
   return (
     <div className={externalWrapperClass}>
       {mobileMenuOpen && (
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100dvh",
-            backgroundColor: "white",
-            zIndex: 10,
-            padding: 48,
-            boxSizing: "border-box",
-          }}
-        >
+        <div className={mobileWrapperPanel}>
           <div
             style={{
               display: "flex",

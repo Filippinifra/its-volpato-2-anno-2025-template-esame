@@ -48,3 +48,15 @@ export const hamburgerWrapperClass = style({
     },
   },
 });
+
+export const mobileWrapperPanel = style({
+  position: "absolute",
+  top: 0,
+  left: 0,
+  width: "100%",
+  height: "100dvh",
+  backgroundColor: "white",
+  zIndex: 10,
+  padding: 48,
+  boxSizing: "border-box",
+});
