@@ -13,6 +13,8 @@ import {
 export const SidebarLayout = ({ children, boxAction }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  console.log("ciao");
+
   return (
     <div className={externalWrapperClass}>
       {mobileMenuOpen && (
