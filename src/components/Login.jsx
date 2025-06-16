@@ -1,6 +1,7 @@
 import { ErrorMessage, Form, Formik } from "formik";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { object, string } from "yup";
+import { useUser } from "../context/userContext";
 import { Button } from "./Button";
 import { Spacer } from "./Spacer";
 import { Typography } from "./Typography";
@@ -21,8 +22,8 @@ const TypographyError = ({ children }) => (
   <Typography color={"red"}>{children}</Typography>
 );
 
-export const Login = ({ onLogin }) => {
-  const push = useNavigate();
+export const Login = () => {
+  const { onLogin } = useUser();
   const onSubmit = async (values) => {
     try {
       // const response = await axios.post("http://localhost:3002/signin", {
@@ -37,10 +38,7 @@ export const Login = ({ onLogin }) => {
         name: "Francesco",
         surname: "Filippini",
       };
-      localStorage.setItem("user", JSON.stringify(userMockup));
       onLogin(userMockup);
-
-      push("/");
     } catch (e) {
       console.log(`Errore: ${e}`);
     }

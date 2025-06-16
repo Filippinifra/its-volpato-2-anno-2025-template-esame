@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BiExit, BiHome, BiMenu, BiPlus, BiUser } from "react-icons/bi";
 import { CgClose } from "react-icons/cg";
+import { useUser } from "../../context/userContext";
 import { SidebarItem } from "../SidebarItem";
 import {
   externalWrapperClass,
@@ -10,8 +11,9 @@ import {
   sidebarWrapperClass,
 } from "./style.css";
 
-export const SidebarLayout = ({ children, boxAction, user, onLogout }) => {
+export const SidebarLayout = ({ children, boxAction }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { user, onLogout } = useUser();
 
   return (
     <div className={externalWrapperClass}>
