@@ -1,5 +1,12 @@
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 
+import { useEffect, useState } from "react";
 import { BiPlus } from "react-icons/bi";
 import { Button } from "./components/Button";
 import { Card } from "./components/Card";
@@ -8,8 +15,37 @@ import { Login } from "./components/Login";
 import { Registration } from "./components/Registration";
 import { SidebarLayout } from "./components/SidebarLayout";
 
+export const authRoutes = ["/", "/add-new"];
+export const unauthRoutes = ["/login", "/signup"];
+
 const AppRoutes = () => {
   const push = useNavigate();
+  const { pathname } = useLocation();
+
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("user")) || null
+  );
+
+  useEffect(() => {
+    const isNotExistingRoute = ![...unauthRoutes, ...authRoutes].some(
+      (r) => r === pathname
+    );
+    const isAuthRoute = authRoutes.some((r) => r === pathname);
+    const isUnAuthRoute = unauthRoutes.some((r) => r === pathname);
+
+    if (!user && (isAuthRoute || isNotExistingRoute)) {
+      push("/login");
+    }
+    if (user && (isUnAuthRoute || isNotExistingRoute)) {
+      push("/");
+    }
+  }, [user]);
+
+  const onLogout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+    push("/login");
+  };
 
   return (
     <Routes>
@@ -27,6 +63,8 @@ const AppRoutes = () => {
                 Aggiungi
               </Button>
             }
+            user={user}
+            onLogout={onLogout}
           >
             Questa è la home!
             <Card titolo={"bella!"} />
@@ -38,12 +76,16 @@ const AppRoutes = () => {
         path="/login"
         element={
           <ContentScreenCentered>
-            <Login />
+            <Login
+              onLogin={(user) => {
+                setUser(user);
+              }}
+            />
           </ContentScreenCentered>
         }
       />
       <Route
-        path="/singup"
+        path="/signup"
         element={
           <ContentScreenCentered>
             <Registration />
@@ -53,7 +95,7 @@ const AppRoutes = () => {
       <Route
         path="/add-new"
         element={
-          <SidebarLayout>
+          <SidebarLayout user={user} onLogout={onLogout}>
             Questa è la pagina per aggiungere un elemento!
           </SidebarLayout>
         }

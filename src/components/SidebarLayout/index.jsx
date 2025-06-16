@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BiHome, BiMenu, BiPlus, BiUser } from "react-icons/bi";
+import { BiExit, BiHome, BiMenu, BiPlus, BiUser } from "react-icons/bi";
 import { CgClose } from "react-icons/cg";
 import { SidebarItem } from "../SidebarItem";
 import {
@@ -10,7 +10,7 @@ import {
   sidebarWrapperClass,
 } from "./style.css";
 
-export const SidebarLayout = ({ children, boxAction }) => {
+export const SidebarLayout = ({ children, boxAction, user, onLogout }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -57,10 +57,15 @@ export const SidebarLayout = ({ children, boxAction }) => {
         }}
       >
         <div className={headerWrapperClass}>
-          <BiUser />
+          {user?.name} <BiUser />
           <BiMenu
             className={hamburgerWrapperClass}
             onClick={() => setMobileMenuOpen(true)}
+          />
+          <BiExit
+            onClick={() => {
+              onLogout();
+            }}
           />
         </div>
         {boxAction && (

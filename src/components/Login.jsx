@@ -1,4 +1,5 @@
 import { ErrorMessage, Form, Formik } from "formik";
+import { useNavigate } from "react-router-dom";
 import { object, string } from "yup";
 import { Button } from "./Button";
 import { Spacer } from "./Spacer";
@@ -20,7 +21,31 @@ const TypographyError = ({ children }) => (
   <Typography color={"red"}>{children}</Typography>
 );
 
-export const Login = () => {
+export const Login = ({ onLogin }) => {
+  const push = useNavigate();
+  const onSubmit = async (values) => {
+    try {
+      // const response = await axios.post("http://localhost:3002/signin", {
+      //   email: values.email,
+      //   password: values.password,
+      // });
+      // localStorage.setItem("user", JSON.stringify(response.data));
+
+      const userMockup = {
+        token: "123",
+        idUser: "456",
+        name: "Francesco",
+        surname: "Filippini",
+      };
+      localStorage.setItem("user", JSON.stringify(userMockup));
+      onLogin(userMockup);
+
+      push("/");
+    } catch (e) {
+      console.log(`Errore: ${e}`);
+    }
+  };
+
   return (
     <div>
       <Typography weight={600} color={"black"}>
@@ -30,7 +55,7 @@ export const Login = () => {
       <Formik
         validationSchema={schema}
         initialValues={{ email: "", password: "" }}
-        onSubmit={(values) => alert(values)}
+        onSubmit={(values) => onSubmit(values)}
       >
         {({ values, setFieldValue }) => (
           <Form
