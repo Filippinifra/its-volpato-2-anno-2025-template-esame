@@ -1,5 +1,5 @@
 import { ErrorMessage, Form, Formik } from "formik";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { object, string } from "yup";
 import { Button } from "./Button";
 import { Spacer } from "./Spacer";
@@ -85,6 +85,8 @@ export const Login = ({ onLogin }) => {
             <ErrorMessage name="password" component={TypographyError} />
             <Spacer height={16} />
             <Button type="submit">Salva</Button>
+            <Spacer height={16} />
+            <Link to="/signup">Registrati</Link>
           </Form>
         )}
       </Formik>

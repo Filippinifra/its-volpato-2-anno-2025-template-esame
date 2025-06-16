@@ -1,5 +1,5 @@
 import { ErrorMessage, Form, Formik } from "formik";
-import React from "react";
+import { Link } from "react-router-dom";
 import { boolean, object, string } from "yup";
 import { Button } from "./Button";
 import { Spacer } from "./Spacer";
@@ -100,6 +100,8 @@ export const Registration = () => {
             <ErrorMessage name="termsAccepted" component={TypographyError} />
             <Spacer height={16} />
             <Button type="submit">Salva</Button>
+            <Spacer height={16} />
+            <Link to="/login">Accedi</Link>
           </Form>
         )}
       </Formik>
