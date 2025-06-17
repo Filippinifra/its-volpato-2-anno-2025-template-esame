@@ -10,18 +10,18 @@ import { useEffect, useState } from "react";
 import { BiPlus } from "react-icons/bi";
 import { SWRConfig } from "swr";
 import { Button } from "./components/Button";
-import { Card } from "./components/Card";
 import { ContentScreenCentered } from "./components/ContentScreenCentered";
 import { Login } from "./components/Login";
 import { Registration } from "./components/Registration";
 import { SidebarLayout } from "./components/SidebarLayout";
+import { HomePanel } from "./panels/HomePanel";
 import { axiosWithToken } from "./utils/axios";
 import { getUser } from "./utils/token";
 
 export const authRoutes = ["/", "/add-new"];
 export const unauthRoutes = ["/login", "/signup"];
 
-const fetcher = (url) => axiosWithToken.get(url);
+const fetcher = (url) => axiosWithToken.get(url).then((data) => data.data);
 
 const AppRoutes = () => {
   const push = useNavigate();
@@ -69,9 +69,7 @@ const AppRoutes = () => {
             user={user}
             onLogout={onLogout}
           >
-            Questa è la home!
-            <Card titolo={"bella!"} />
-            <Card titolo={"brutta!"} />
+            <HomePanel />
           </SidebarLayout>
         }
       />
