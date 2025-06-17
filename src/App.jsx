@@ -123,7 +123,7 @@ const AppRoutes = () => {
 const App = () => {
   return (
     <BrowserRouter>
-      <SWRConfig value={{ fetcher }}>
+      <SWRConfig value={{ fetcher, revalidateOnFocus: false }}>
         <AppRoutes />
       </SWRConfig>
     </BrowserRouter>
