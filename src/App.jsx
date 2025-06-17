@@ -8,23 +8,26 @@ import {
 
 import { useEffect, useState } from "react";
 import { BiPlus } from "react-icons/bi";
+import { SWRConfig } from "swr";
+import { axiosWithToken } from "./axios";
 import { Button } from "./components/Button";
 import { Card } from "./components/Card";
 import { ContentScreenCentered } from "./components/ContentScreenCentered";
 import { Login } from "./components/Login";
 import { Registration } from "./components/Registration";
 import { SidebarLayout } from "./components/SidebarLayout";
+import { getUser } from "./token";
 
 export const authRoutes = ["/", "/add-new"];
 export const unauthRoutes = ["/login", "/signup"];
+
+const fetcher = (url) => axiosWithToken.get(url);
 
 const AppRoutes = () => {
   const push = useNavigate();
   const { pathname } = useLocation();
 
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("user")) || null
-  );
+  const [user, setUser] = useState(getUser());
 
   useEffect(() => {
     const isNotExistingRoute = ![...unauthRoutes, ...authRoutes].some(
@@ -122,7 +125,9 @@ const AppRoutes = () => {
 const App = () => {
   return (
     <BrowserRouter>
-      <AppRoutes />
+      <SWRConfig value={{ fetcher }}>
+        <AppRoutes />
+      </SWRConfig>
     </BrowserRouter>
   );
 };
