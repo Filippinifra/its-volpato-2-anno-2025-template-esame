@@ -14,6 +14,8 @@ import { ContentScreenCentered } from "./components/ContentScreenCentered";
 import { Login } from "./components/Login";
 import { Registration } from "./components/Registration";
 import { SidebarLayout } from "./components/SidebarLayout";
+import { ToastContainer } from "./components/ToastContainer";
+import { ToastProvider } from "./context/useToast";
 
 export const authRoutes = ["/", "/add-new"];
 export const unauthRoutes = ["/login", "/signup"];
@@ -122,7 +124,10 @@ const AppRoutes = () => {
 const App = () => {
   return (
     <BrowserRouter>
-      <AppRoutes />
+      <ToastProvider>
+        <ToastContainer />
+        <AppRoutes />
+      </ToastProvider>
     </BrowserRouter>
   );
 };
